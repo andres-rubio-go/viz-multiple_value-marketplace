@@ -112,7 +112,25 @@ class MultipleValue extends React.PureComponent {
     return Math.round(this.getWindowSize() * multiplier);
   };
 
+  /**
+   * Checks if there is a drill menu opened and return the element
+   * @returns
+   */
+  checkForExistingDrillMenu = () => {
+    return document.querySelectorAll('[data-drilling-next-container="true"]');
+  };
+
+  /**
+   * Handles click on cell so drill menu can be opened
+   * Exception will be thrown if multiple drill menu are opened
+   * We need to check for other drill menus and close them
+   * @param {*} cell the cell that was clicked
+   * @param {*} event the click event data
+   */
   handleClick = (cell, event) => {
+    if (this.checkForExistingDrillMenu) {
+      document.getElementById('modal-root').remove();
+    }
     cell.link !== undefined
       ? LookerCharts.Utils.openDrillMenu({
           links: cell.link,
