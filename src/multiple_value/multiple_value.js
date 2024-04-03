@@ -114,10 +114,13 @@ class MultipleValue extends React.PureComponent {
 
   /**
    * Checks if there is a drill menu opened and return the element
-   * @returns
+   * @returns drill menu element
    */
   checkForExistingDrillMenu = () => {
-    return document.querySelectorAll('[data-drilling-next-container="true"]');
+    const drillMenuElements = document.querySelectorAll(
+      '[data-drilling-next-container="true"]'
+    );
+    return drillMenuElements.length > 0;
   };
 
   /**
@@ -128,7 +131,7 @@ class MultipleValue extends React.PureComponent {
    * @param {*} event the click event data
    */
   handleClick = (cell, event) => {
-    if (this.checkForExistingDrillMenu) {
+    if (this.checkForExistingDrillMenu()) {
       document.getElementById('modal-root').remove();
     }
     cell.link !== undefined
